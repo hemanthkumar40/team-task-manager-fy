@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Team Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Team Task Manager</a>
+        <ul class="nav-links">
+            <li><a href="login.html" class="active">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="login-container">
+            <div class="login-card">
+                <h1>Login</h1>
+                
+                <!-- Alert message -->
+                <div id="alertBox" class="alert" style="display: none;"></div>
+
+                <!-- Login Form -->
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Select Role</label>
+                        <select id="role" name="role" required>
+                            <option value="">-- Select Role --</option>
+                            <option value="team_lead">Team Lead (Admin)</option>
+                            <option value="team_member">Team Member</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+
+                <p style="text-align: center; margin-top: 20px;">
+                    Don't have an account? <a href="signup.html">Sign Up</a>
+                </p>
+
+                <!-- Demo Accounts Section -->
+                <div class="demo-section">
+                    <h3>Demo / Test Accounts</h3>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        Click any button below to instantly login with a demo account.
+                    </p>
+
+                    <h4 style="color: #9b59b6; margin: 15px 0 10px;">Team Lead Accounts:</h4>
+                    <div class="demo-accounts">
+                        <div class="demo-account">
+                            <div class="demo-account-info">
+                                <strong>Alex Thompson (Team Lead)</strong><br>
+                                <span>teamlead1@test.com</span>
+                            </div>
+                            <button class="btn btn-small btn-primary" onclick="autoFill('teamlead1@test.com', 'admin123', 'team_lead')">Login</button>
+                        </div>
+                        <div class="demo-account">
+                            <div class="demo-account-info">
+                                <strong>Sarah Chen (Team Lead)</strong><br>
+                                <span>teamlead2@test.com</span>
+                            </div>
+                            <button class="btn btn-small btn-primary" onclick="autoFill('teamlead2@test.com', 'admin123', 'team_lead')">Login</button>
+                        </div>
+                    </div>
+
+                    <h4 style="color: #3498db; margin: 15px 0 10px;">Team Member Accounts:</h4>
+                    <div class="demo-accounts">
+                        <div class="demo-account">
+                            <div class="demo-account-info">
+                                <strong>Mike Johnson</strong><br>
+                                <span>member1@test.com</span>
+                            </div>
+                            <button class="btn btn-small btn-success" onclick="autoFill('member1@test.com', 'member123', 'team_member')">Login</button>
+                        </div>
+                        <div class="demo-account">
+                            <div class="demo-account-info">
+                                <strong>Emily Davis</strong><br>
+                                <span>member2@test.com</span>
+                            </div>
+                            <button class="btn btn-small btn-success" onclick="autoFill('member2@test.com', 'member123', 'team_member')">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Auto fill demo account and submit
+        function autoFill(email, password, role) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            document.getElementById('role').value = role;
+            
+            // Submit the form
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            if (!email || !password || !role) {
+                showAlert('Please fill in all fields', 'error');
+                return;
+            }
+
+            try {
+                showAlert('Logging in...', 'info');
+                
+                const response = await fetch(API_URL + '/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    // If login fails, try to seed demo users first
+                    if (email.includes('@test.com')) {
+                        showAlert('Setting up demo accounts...', 'info');
+                        await fetch(API_URL + '/auth/seed-demo', { method: 'POST' });
+                        
+                        // Retry login
+                        const retryResponse = await fetch(API_URL + '/auth/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password })
+                        });
+                        
+                        const retryData = await retryResponse.json();
+                        
+                        if (!retryResponse.ok) {
+                            showAlert(retryData.error || 'Login failed', 'error');
+                            return;
+                        }
+                        
+                        // Continue with login
+                        handleLoginSuccess(retryData, role);
+                        return;
+                    }
+                    
+                    showAlert(data.error || 'Login failed', 'error');
+                    return;
+                }
+
+                handleLoginSuccess(data, role);
+
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Connection error. Please try again.', 'error');
+            }
+        });
+
+        function handleLoginSuccess(data, expectedRole) {
+            // Save user data to localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('profile', JSON.stringify(data.profile));
+            localStorage.setItem('token', data.session.access_token);
+
+            // Check if role matches
+            const userRole = data.profile?.role || data.user?.user_metadata?.role;
+            
+            if (userRole !== expectedRole) {
+                showAlert('Role mismatch. Please select the correct role.', 'error');
+                return;
+            }
+
+            showAlert('Login successful! Redirecting...', 'success');
+
+            // Redirect based on role
+            setTimeout(() => {
+                if (userRole === 'team_lead') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'member-dashboard.html';
+                }
+            }, 1000);
+        }
+
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = 'alert alert-' + type;
+            alertBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

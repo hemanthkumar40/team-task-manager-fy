@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Review - Team Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar will be inserted by JS -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Task Review</h1>
+            <p>Review submitted tasks from team members</p>
+        </div>
+
+        <!-- Pending Review Tasks -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Tasks Pending Review</h3>
+            </div>
+            <div id="pendingReviewList">
+                <div class="loading">Loading tasks...</div>
+            </div>
+        </div>
+
+        <!-- Recently Reviewed -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Recently Reviewed</h3>
+            </div>
+            <div id="recentlyReviewedList">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Review Task</h3>
+                <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+            </div>
+            <div id="reviewModalContent">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/task-review.js"></script>
+</body>
+</html>

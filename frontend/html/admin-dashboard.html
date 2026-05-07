@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Team Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="admin-dashboard.html" class="logo">Team Task Manager</a>
+        <ul class="nav-links">
+            <li><a href="admin-dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="task-review.html">Review</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="notifications.html">Notifications <span id="notifBadge" class="notification-badge" style="display:none;">0</span></a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Admin Dashboard</h1>
+            <p>Welcome, <span id="userName">Admin</span>! <span class="role-badge role-team-lead">Team Lead</span></p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="create-project.html" class="btn btn-primary">Create Project</a>
+            <a href="create-task.html" class="btn btn-success">Create Task</a>
+            <a href="task-review.html" class="btn btn-warning">Review Tasks</a>
+            <a href="members.html" class="btn btn-secondary">View Members</a>
+            <a href="reports.html" class="btn btn-secondary">View Reports</a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalProjects">0</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalTasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-card pending">
+                <div class="stat-number" id="pendingReview">0</div>
+                <div class="stat-label">Pending Review</div>
+            </div>
+            <div class="stat-card completed">
+                <div class="stat-number" id="completedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card rework">
+                <div class="stat-number" id="reworkTasks">0</div>
+                <div class="stat-label">Needs Rework</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeMembers">0</div>
+                <div class="stat-label">Team Members</div>
+            </div>
+        </div>
+
+        <!-- Two column layout -->
+        <div class="grid-2">
+            <!-- Tasks Pending Review -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tasks Pending Review</h3>
+                </div>
+                <div id="pendingTasksList">
+                    <div class="loading">Loading...</div>
+                </div>
+                <a href="task-review.html" class="btn btn-small btn-primary" style="margin-top: 15px;">View All</a>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Recent Activity</h3>
+                </div>
+                <ul id="activityList" class="activity-list">
+                    <li class="loading">Loading...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recent Projects -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Projects</h3>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTable">
+                        <tr><td colspan="4" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+</body>
+</html>

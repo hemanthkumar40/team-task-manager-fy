@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project - Team Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar will be inserted by JS -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="login-container" style="max-width: 600px;">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Create New Project</h2>
+                </div>
+
+                <!-- Alert -->
+                <div id="alertBox" class="alert" style="display: none;"></div>
+
+                <form id="createProjectForm">
+                    <div class="form-group">
+                        <label for="projectName">Project Name *</label>
+                        <input type="text" id="projectName" name="projectName" placeholder="Enter project name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Enter project description"></textarea>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" name="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Deadline</label>
+                            <input type="date" id="deadline" name="deadline">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Add Team Members</label>
+                        <div id="membersList" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+                            <div class="loading">Loading members...</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary">Create Project</button>
+                        <a href="projects.html" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/create-project.js"></script>
+</body>
+</html>

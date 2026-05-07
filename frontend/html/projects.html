@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Team Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navbar will be inserted by JS -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h1>Projects</h1>
+                <p>Manage all your team projects</p>
+            </div>
+            <a href="create-project.html" class="btn btn-primary" id="createProjectBtn" style="display:none;">Create Project</a>
+        </div>
+
+        <!-- Filter/Search -->
+        <div class="card" style="margin-bottom: 20px;">
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                    <input type="text" id="searchInput" placeholder="Search projects...">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="not_started">Not Started</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects List -->
+        <div id="projectsList">
+            <div class="loading">Loading projects...</div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>

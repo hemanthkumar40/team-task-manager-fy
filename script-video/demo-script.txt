@@ -1,0 +1,105 @@
+============================================
+TEAM TASK MANAGER - VIDEO DEMO SCRIPT
+============================================
+Duration: 3-4 minutes
+
+--------------------------------------------
+INTRODUCTION (30 seconds)
+--------------------------------------------
+"Hello everyone, I'm going to demonstrate my project called Team Task Manager.
+
+This is a web application that helps teams manage their projects and tasks efficiently. It has two types of users - Team Leads who are admins, and Team Members who work on assigned tasks.
+
+Let me show you how it works."
+
+--------------------------------------------
+LOGIN & DEMO ACCOUNTS (30 seconds)
+--------------------------------------------
+"First, let's look at the login page.
+
+We have demo accounts for testing. I'll click on a Team Lead account to login as an admin.
+
+As you can see, the email and password are auto-filled. After clicking login, I'm redirected to the Admin Dashboard."
+
+--------------------------------------------
+ADMIN DASHBOARD (45 seconds)
+--------------------------------------------
+"This is the Admin Dashboard. 
+
+At the top, we can see quick stats - total projects, total tasks, tasks pending review, completed tasks, and team members count.
+
+Below that, we have Quick Action buttons to create projects, create tasks, and review submitted work.
+
+The dashboard shows tasks that are pending review and recent activity from the team.
+
+Let me create a new project."
+
+--------------------------------------------
+CREATE PROJECT (30 seconds)
+--------------------------------------------
+"To create a project, I click Create Project.
+
+I enter the project name, description, start date, and deadline.
+
+I can also select which team members to add to this project.
+
+After clicking Create, the project is saved and we can see it in the Projects list."
+
+--------------------------------------------
+CREATE TASK (30 seconds)
+--------------------------------------------
+"Now let me create a task.
+
+I enter the task title, description, select the project, assign it to a team member, set the due date, and choose the priority.
+
+When I create this task, the assigned member will receive a notification."
+
+--------------------------------------------
+MEMBER LOGIN & WORKFLOW (45 seconds)
+--------------------------------------------
+"Now let me show the member side. I'll logout and login as a Team Member.
+
+This is the Member Dashboard. It shows my assigned tasks, in-progress tasks, and upcoming deadlines.
+
+Let me view my tasks. I can see the task that was just assigned to me.
+
+I'll click Start to begin working on it. The status changes to In Progress.
+
+After completing my work, I click Submit to send it for review. The status changes to Pending Review."
+
+--------------------------------------------
+REVIEW PROCESS (45 seconds)
+--------------------------------------------
+"Now let me login back as the Team Lead to review the submitted task.
+
+I go to the Review section. Here I can see all tasks pending review.
+
+I can see the task submitted by the member along with their comments.
+
+I have two options - Approve or Request Rework.
+
+If I click Approve, the task status becomes Verified Completed.
+
+If I click Request Rework, I need to add feedback explaining what needs to be fixed. The task goes back to the member with status Needs Rework.
+
+The member receives a notification with my feedback."
+
+--------------------------------------------
+REPORTS & ACTIVITY (20 seconds)
+--------------------------------------------
+"The Reports page shows statistics about projects and tasks, task status breakdown, and member performance.
+
+All activities are logged and can be viewed in the activity timeline."
+
+--------------------------------------------
+CONCLUSION (15 seconds)
+--------------------------------------------
+"That's the Team Task Manager application.
+
+Key features include role-based access, task review workflow, notifications, activity tracking, and performance monitoring.
+
+Thank you for watching!"
+
+============================================
+END OF SCRIPT
+============================================

@@ -1,0 +1,183 @@
+============================================
+TEAM TASK MANAGER - PROJECT REQUIREMENTS
+============================================
+
+PROJECT OVERVIEW
+----------------
+Team Task Manager is a web application that allows teams to:
+- Create and manage projects
+- Assign and track tasks
+- Submit work for review
+- Approve or request rework on tasks
+- Track team performance
+
+WORKFLOW
+--------
+1. Team Lead creates a project
+2. Team Lead creates tasks and assigns to members
+3. Team Member updates task status (Not Started → In Progress)
+4. Team Member submits completed work (In Progress → Pending Review)
+5. Team Lead reviews the work
+   - If approved: Pending Review → Verified Completed
+   - If needs changes: Pending Review → Needs Rework
+6. Member fixes issues and resubmits
+
+USER ROLES
+----------
+1. Team Lead (Admin)
+   - Create/edit/delete projects
+   - Create/assign/delete tasks
+   - Review submitted tasks
+   - Approve or request rework
+   - View reports and statistics
+
+2. Team Member
+   - View assigned tasks
+   - Update task status
+   - Add progress notes
+   - Submit work for review
+   - View feedback from admin
+
+TASK STATUS FLOW
+----------------
+1. Not Started - Task created but not yet started
+2. In Progress - Member is working on the task
+3. Pending Review - Task submitted for admin review
+4. Verified Completed - Admin approved the task
+5. Needs Rework - Admin requested changes
+6. Overdue - Past due date
+
+TECHNOLOGIES USED
+-----------------
+Frontend:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+Backend:
+- Node.js
+- Express.js
+
+Database:
+- Supabase PostgreSQL
+
+Authentication:
+- Supabase Auth
+
+FOLDER STRUCTURE
+----------------
+team-task-manager/
+├── frontend/
+│   ├── html/           # All HTML pages
+│   ├── css/            # Stylesheets
+│   ├── js/             # JavaScript files
+│   └── assets/         # Images
+├── backend/
+│   ├── routes/         # API routes
+│   ├── middleware/     # Auth middleware
+│   ├── config/         # Database config
+│   └── server.js       # Main server
+├── db/
+│   └── schema.sql      # Database schema
+└── README.md
+
+INSTALLATION STEPS
+------------------
+1. Clone the repository
+2. Navigate to backend folder: cd backend
+3. Install dependencies: npm install
+4. Create .env file with Supabase credentials
+5. Start server: npm start
+6. Open http://localhost:3000
+
+DEPENDENCIES
+------------
+- express: Web framework
+- cors: Cross-origin requests
+- dotenv: Environment variables
+- @supabase/supabase-js: Database client
+
+SUPABASE SETUP
+--------------
+1. Create a Supabase project
+2. Run the schema.sql to create tables
+3. Enable Row Level Security (RLS)
+4. Copy API keys to .env file
+
+API ENDPOINTS
+-------------
+Authentication:
+- POST /api/auth/signup
+- POST /api/auth/login
+- POST /api/auth/logout
+- GET /api/auth/me
+
+Projects:
+- GET /api/projects
+- POST /api/projects
+- PUT /api/projects/:id
+- DELETE /api/projects/:id
+- POST /api/projects/:id/members
+- DELETE /api/projects/:id/members/:memberId
+
+Tasks:
+- GET /api/tasks
+- POST /api/tasks
+- PUT /api/tasks/:id
+- PUT /api/tasks/:id/submit
+- DELETE /api/tasks/:id
+- POST /api/tasks/:id/notes
+
+Reviews:
+- POST /api/reviews/approve/:taskId
+- POST /api/reviews/rework/:taskId
+
+Members:
+- GET /api/members
+- GET /api/members/:id
+- GET /api/members/:id/stats
+
+Notifications:
+- GET /api/notifications/user/:userId
+- PUT /api/notifications/:id/read
+- PUT /api/notifications/user/:userId/read-all
+
+Activities:
+- GET /api/activities
+- POST /api/activities
+- GET /api/activities/stats/dashboard
+
+DASHBOARD FUNCTIONALITIES
+-------------------------
+Admin Dashboard:
+- Total projects count
+- Total tasks count
+- Tasks pending review
+- Completed tasks count
+- Tasks needing rework
+- Active team members
+- Quick action buttons
+- Recent activity feed
+- Pending review list
+
+Member Dashboard:
+- Assigned tasks count
+- In progress tasks
+- Pending review tasks
+- Completed tasks
+- Upcoming deadlines table
+- Recent notifications
+- Quick action buttons
+
+UNIQUE FEATURES
+---------------
+1. Task Review Workflow - Tasks go through review process
+2. Rework Request System - Admin can request changes
+3. Activity Timeline - Track all actions
+4. Progress Notes - Members can add comments
+5. Task Priority Labels - High, Medium, Low
+6. Overdue Highlighting - Visual indicator for late tasks
+7. Member Performance Tracking - Stats per member
+8. Search & Filters - Find tasks quickly
+9. Notifications - Stay updated on changes
+10. Demo Accounts - Quick login for testing
